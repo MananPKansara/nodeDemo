@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Profile</title>
+    <style>
+      body{
+        background: linear-gradient(90deg, #FC466B, #3F5EFB);
+      }
+      .sticky-header{
+        position: fixed;
+        top: 0;
+        width: 100vw;
+      }
+      .main{
+        background-color: rgb(255, 255, 255, 0.3);
+        width: 40vw;
+        margin-top: 9.5vh;
+        border-radius: 20px;
+       }
+       #image.form-control{
+        display: inline !important;
+        width: 55% !important;
+       }
+       .bg{
+        background: transparent;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-width: 0;
+       }
+       .bg:focus {
+            background: transparent;
+            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+            border-width: 0;
+            
+        }
+        .form-control[type="file"]::file-selector-button {
+            z-index: 1;
+            font-size: 1em;
+            color: #fff;
+            background-color : #212529; 
+            padding: .5rem 1rem;
+            pointer-events: none;
+            border-radius: 0 4px 4px 0;
+        }
+        .form-control[type="file"]:hover::file-selector-button {
+            background-color : #212529 !important; 
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-header">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/createPost">Create Posts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/myPosts">My Posts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">My Profile</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Assign Role</a>
+              </li> -->
+            </ul>
+            <a href="/logout"><button class="btn" type="submit" style="background-color: #FC466B; color: #fff;" >Logout</button></a>
+          </div>
+        </div>
+      </nav>
+
+
+      <form method="post" enctype="multipart/form-data">
+        <div class="container main text-center border " id="main">
+            <div class="container display-3 fw-bolder text-center my-3">My Profile</div>
+            <% if(data.error != null) { %>
+              <div class="fs-5 fw-bolder text-center mb-2">Error : <%= data.error %></div>
+            <% } %>
+            <div class="imageDisplay mb-3"><img src="uploads/<%= data.user.image %> " width="200"></div>
+            <div class="imageContainer fs-3 mb-3" style="display: none;"><span class="fw-bolder">Change Image : </span><span><input type="file"  name="image" id="image" class="form-control bg"  style="width:100"></span></div>
+            <div class="usernameContainer fs-3 mb-3"><span class="fw-bolder">Username</span> : <span class="username"><%= data.user.username %></span></div>
+            <div class="emailContainer fs-3 mb-3"><span class="fw-bolder">Email Id</span> : <span><%= data.user.email %></span></div>
+            <button type="button" class="btn btn-dark fs-4 mb-5 edit" onclick="abc()">Edit Profile</button>
+            <button type="submit" class="btn btn-dark fs-4 mb-5 save" style="display: none;"> Save </button>
+            <button type="button" onclick="location.reload()" class="btn btn-dark fs-4 mb-5 cancel" style="display: none;">Cancel</button>
+        </div>
+    </form>
+
+    <script>
+        function abc()
+        {
+            let container = document.getElementById('main');
+            console.log(container);
+
+            // display image upload option 
+            let imageUpload = document.querySelector('.imageContainer');
+            console.log(imageUpload);
+            imageUpload.style.display = 'block';
+
+            // get cotainer of username
+            let usernameContainer = document.querySelector('.usernameContainer');
+            console.log(usernameContainer);
+            let username = usernameContainer.querySelector('.username');
+
+            // create input tag to enter username
+            let usernameInput = document.createElement('input');
+            usernameInput.setAttribute('name', 'username');
+            usernameInput.setAttribute('value', username.innerText);
+            usernameInput.setAttribute('type', 'text');
+            usernameInput.setAttribute('class', 'bg')
+
+            // remove username text and add input element
+            usernameContainer.removeChild(username);
+            usernameContainer.appendChild(usernameInput);
+
+            // hide edit button
+            let edit = container.querySelector('.edit');
+            edit.style.display = 'none'
+
+            // display them
+            let submit = container.querySelector('.save');
+            let cancel = container.querySelector('.cancel');
+            submit.style.display = 'inline'
+            cancel.style.display = 'inline'
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Create Post</title>
+    <style>
+        body {
+            background: linear-gradient(90deg, #FC466B, #3F5EFB);
+        }
+
+        body {
+            background: linear-gradient(45deg, #FC466B, #3F5EFB);
+            /* color: #fff; */
+        }
+
+        textarea{
+            overflow: hidden;
+        }
+
+        .main {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            width: 900px;
+            margin-top: 13vh;
+            padding: 3vh 10vh;
+            border-radius: 3vh;
+            box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease-in-out;
+            z-index: 2;
+        }
+
+        .bg {
+            background: transparent;
+            background-color: rgba(255, 255, 255, 0.3);
+            /* color: #fff; */
+        }
+
+        .bg:focus {
+            background: transparent;
+            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+            /* color: #fff; */
+        }
+
+        .btn:hover {
+            /* color: #fff; */
+            box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control[type="file"]::file-selector-button {
+            z-index: 1;
+            font-size: 1em;
+            color: #fff;
+            background-color : #212529; 
+            padding: .5rem 1rem;
+            pointer-events: none;
+            border-radius: 0 4px 4px 0;
+        }
+        .form-control[type="file"]:hover::file-selector-button {
+            background-color : #212529 !important; 
+        }
+        .sticky-header{
+        position: fixed;
+        top: 0;
+        width: 99.5vw;
+        z-index: 3;
+      }
+            /* Hide scrollbar track */
+      body::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      /* Define scrollbar thumb */
+      body::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        /* border-radius: 20px; */
+      }
+
+      /* Define scrollbar hover state */
+      body::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      /* Define scrollbar width and height */
+      body::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-header">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Manan26</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/createPost">Create Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/myPosts">My Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/profile">My Profile</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Assign Role</a>
+              </li> -->
+                </ul>
+                <a href="/logout"><button class="btn" type="submit"
+                        style="background-color: #FC466B; color: #fff;">Logout</button></a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="container main">
+        <div class="container display-3 fw-bolder text-center my-2 ">Update Post</div>
+        <div class="fs-5 text-center mb-2 " id="error"></div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label fw-bolder fs-4">Title</label>
+                <input type="text" name="title" class="form-control bg" id="title"  value="<%= data.post.title %>">
+            </div>
+            <div class="mb-3">
+                <div class="fw-bolder fs-4 mb-2">Current Image</div>
+                <img src="./../postUploads/<%= data.post.image %>" height="200">
+            </div>            
+            <div class="mb-3">
+                <label for="image" class="form-label fw-bolder fs-4">Upload New Image</label>
+                <input name="image" class="form-control bg" type="file" id="image">
+            </div>
+            <div class="">
+                <label for="content" class="form-label fw-bolder fs-4">Content</label>
+                <textarea name="content" class="form-control bg" id="content" rows="6"><%= data.post.content %></textarea>
+            </div>
+            <!-- <div style="align-items: center;">
+                <button type="button" class="btn btn-primary">Primary</button>
+            </div> -->
+            <div class="d-grid gap-2 mt-4 mb-2 ">
+                <button class="form-control btn btn-dark fs-4" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', handleSubmit);
+
+        // Handle form submission
+        function handleSubmit(event) {
+        event.preventDefault(); 
+        
+        const formData = new FormData(form);
+
+        // Send data to server using fetch
+        fetch('./updatePost/<%= data.post.id %>', {
+            method: 'PUT',
+            body: formData
+        })
+        .then(response => response.json()) // parse response as JSON
+        .then(data => {
+            if(data.error != null){
+                let errorDiv = document.getElementById('error');
+                errorDiv.textContent = data.error;
+            }else{
+                location.href = './../myPosts';
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+        }
+
+
+
+        window.onscroll = function() {stickyHeader()};
+        var header = document.querySelector(".sticky-header");
+        var headerOffset = header.offsetTop;
+
+        function stickyHeader() {
+          if (window.pageYOffset > headerOffset) {
+            header.classList.add("sticky");
+          } else {
+            header.classList.remove("sticky");
+          }
+        }
+
+      </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

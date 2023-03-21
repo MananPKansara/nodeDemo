@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 98.5vh;
+            background: linear-gradient(45deg, #FC466B, #3F5EFB);
+            color: #fff;
+        }
+        .main {
+            background-color: rgba(255,255,255,0.3);
+            border-left: 1px solid rgba(255,255,255,0.3);
+            border-top: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            width: 500px;
+            margin-top: 1.5vh;
+            padding: 3vh 10vh;
+            border-radius: 3vh;
+            box-shadow: 20px 20px 40px -6px rgba(0,0,0,0.2);
+            transition: all 0.2s ease-in-out;
+
+        }
+        input{
+            color: #fff;
+        }
+        .bg{
+            background: transparent;
+            background-color: rgba(255,255,255,0.3);
+            color: #fff;
+        }
+        .bg:focus{
+            background: transparent;
+            background-color: rgba(255,255,255,0.3);
+            box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
+            color: #fff;
+        }
+        .btn:hover{
+            color: #fff;
+            box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container main">
+        <div class="display-3 text-center mb-2">Register</div>
+        <% if(error != null) { %>
+            <div class="fs-6 text-center mb-2">Error : <%= error %></div>
+        <% } %>
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="username" class="form-label fs-5">Username</label>
+                <input type="text" name="username" class="form-control bg" id="username" autocomplete>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label fs-4">Email Id</label>
+                <input type="text" name="email" class="form-control bg" id="email" autocomplete>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label fs-4">Password</label>
+                <input type="password" name="password" class="form-control bg" id="password" autocomplete>
+            </div>
+            <div class="">
+                <label for="image" class="form-label fs-4">Upload Profile Picture</label>
+                <input name="image" class="form-control bg" type="file" id="image">
+            </div>
+            <div class="mt-3"></div>
+            <div class="d-grid gap-2 mt-4 mb-2 ">
+                <button class="form-control btn btn-lg bg" type="submit">Signup</button>
+            </div>
+            <div class="text-center fs-3">OR</div>
+            <div class="d-grid gap-2 mt-2 mb-2 ">
+                <a href="./../"><button class="form-control btn btn-lg bg" type="button">Login</button></a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
